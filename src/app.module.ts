@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CatalogModule } from './catalog/catalog.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    ConfigModule.forRoot(),
   ],
 })
 export class AppModule {}
