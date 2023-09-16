@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { GenreService } from './genre.service';
-import { Genre } from './entities/genre.entity';
+import { Genre } from './schemas/genre.schema';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
 
@@ -13,23 +13,26 @@ export class GenreResolver {
     return this.genreService.create(createGenreInput);
   }
 
-  @Query(() => [Genre], { name: 'genre' })
+  @Query(() => [Genre], { name: 'genres' })
   findAll() {
     return this.genreService.findAll();
   }
 
   @Query(() => Genre, { name: 'genre' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('_id', { type: () => String }) id: string) {
     return this.genreService.findOne(id);
   }
 
   @Mutation(() => Genre)
-  updateGenre(@Args('updateGenreInput') updateGenreInput: UpdateGenreInput) {
-    return this.genreService.update(updateGenreInput.id, updateGenreInput);
+  updateGenre(
+    @Args('_id', { type: () => String }) id: string,
+    @Args('updateGenreInput') updateGenreInput: UpdateGenreInput,
+  ) {
+    return this.genreService.update(id, updateGenreInput);
   }
 
   @Mutation(() => Genre)
-  removeGenre(@Args('id', { type: () => Int }) id: number) {
+  removeGenre(@Args('_id', { type: () => String }) id: string) {
     return this.genreService.remove(id);
   }
 }

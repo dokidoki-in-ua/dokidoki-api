@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGenreInput } from './dto/create-genre.input';
 import { UpdateGenreInput } from './dto/update-genre.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Genre, GenreDocument } from './schemas';
+import { Model } from 'mongoose';
+import { ID } from '@nestjs/graphql';
 
 @Injectable()
 export class GenreService {
+  constructor(
+    @InjectModel(Genre.name) private genreModel: Model<GenreDocument>,
+  ) {}
+
   create(createGenreInput: CreateGenreInput) {
-    return 'This action adds a new genre';
+    return this.genreModel.create(createGenreInput);
   }
 
   findAll() {
-    return `This action returns all genre`;
+    return this.genreModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+  findOne(id: string) {
+    return this.genreModel.findById(id).lean();
   }
 
-  update(id: number, updateGenreInput: UpdateGenreInput) {
-    return `This action updates a #${id} genre`;
+  update(id: string, updateGenreInput: UpdateGenreInput) {
+    return this.genreModel.findOneAndUpdate({ _id: id }, updateGenreInput, {
+      new: true,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  remove(id: string) {
+    return this.genreModel.findByIdAndDelete(id);
   }
 }
