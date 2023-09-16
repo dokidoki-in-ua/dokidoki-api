@@ -3,6 +3,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -11,7 +12,11 @@ import { ConfigModule } from '@nestjs/config';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      cache: true,
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
   ],
 })
 export class AppModule {}
