@@ -10,6 +10,12 @@ export class Genre {
   @Field(() => ID)
   _id: number;
 
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
+
   @Prop({ required: true })
   @Field()
   ukrainian: string;
