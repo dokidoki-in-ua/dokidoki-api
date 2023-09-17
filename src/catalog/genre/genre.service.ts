@@ -25,12 +25,14 @@ export class GenreService {
   }
 
   update(id: string, updateGenreInput: UpdateGenreInput) {
-    return this.genreModel.findOneAndUpdate({ _id: id }, updateGenreInput, {
-      new: true,
-    });
+    return this.genreModel
+      .findOneAndUpdate({ _id: id }, updateGenreInput, {
+        new: true,
+      })
+      .lean();
   }
 
   remove(id: string) {
-    return this.genreModel.findByIdAndDelete(id);
+    return this.genreModel.findByIdAndDelete(id).lean();
   }
 }
