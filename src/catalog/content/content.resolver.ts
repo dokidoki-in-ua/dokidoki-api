@@ -1,8 +1,18 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+  Info,
+} from '@nestjs/graphql';
 import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentInput } from './dto/create-content.input';
 import { UpdateContentInput } from './dto/update-content.input';
+import { Genre } from '../genre/schemas';
 
 @Resolver(() => Content)
 export class ContentResolver {

@@ -1,12 +1,26 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+  Info,
+} from '@nestjs/graphql';
 import { AnimeService } from './anime.service';
-import { Anime } from './schemas/anime.schema';
+import { Anime, AnimeDocument } from './schemas/anime.schema';
 import { CreateAnimeInput } from './dto/create-anime.input';
 import { UpdateAnimeInput } from './dto/update-anime.input';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Resolver(() => Anime)
 export class AnimeResolver {
-  constructor(private readonly animeService: AnimeService) {}
+  constructor(
+    private readonly animeService: AnimeService,
+    @InjectModel(Anime.name) private animeModel: Model<AnimeDocument>,
+  ) {}
 
   @Mutation(() => Anime)
   createAnime(@Args('createAnimeInput') createAnimeInput: CreateAnimeInput) {
@@ -34,5 +48,10 @@ export class AnimeResolver {
   @Mutation(() => Anime)
   removeAnime(@Args('_id', { type: () => String }) id: string) {
     return this.animeService.remove(id);
+  }
+
+  @ResolveField(() => [Anime])
+  genres(@Parent() content, @Info() { parentType }) {
+    return this.animeModel.find;
   }
 }
