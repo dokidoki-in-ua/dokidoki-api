@@ -12,10 +12,20 @@ import { ContentService } from './content.service';
 import { Content } from './schemas/content.schema';
 import { CreateContentInput } from './dto/create-content.input';
 import { UpdateContentInput } from './dto/update-content.input';
-import { Genre } from '../genre/schemas';
+import { Genre, GenreDocument } from '../genre/schemas';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { GenreService } from '../genre/genre.service';
 
 @Resolver(() => Content)
 export class ContentResolver {
+  constructor(private readonly genreService: GenreService) {}
+
+  @ResolveField(() => [Content])
+  genres(@Parent() content, @Info() { contentType }) {
+    return this.genreService.findByParams({ _id: { $in: content.genres } });
+  }
+
   // constructor(private readonly contentService: ContentService) {}
   // @Mutation(() => Content)
   // createContent(

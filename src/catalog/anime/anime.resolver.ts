@@ -49,9 +49,4 @@ export class AnimeResolver {
   removeAnime(@Args('_id', { type: () => String }) id: string) {
     return this.animeService.remove(id);
   }
-
-  @ResolveField(() => [Anime])
-  genres(@Parent() content, @Info() { parentType }) {
-    return this.animeModel.find;
-  }
 }

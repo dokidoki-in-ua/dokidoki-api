@@ -9,5 +9,6 @@ import { Genre, GenreSchema } from './schemas';
     MongooseModule.forFeature([{ name: Genre.name, schema: GenreSchema }]),
   ],
   providers: [GenreResolver, GenreService],
+  exports: [GenreService],
 })
 export class GenreModule {}

@@ -24,6 +24,10 @@ export class GenreService {
     return this.genreModel.findById(id).lean();
   }
 
+  findByParams(params: object) {
+    return this.genreModel.find(params).lean();
+  }
+
   update(id: string, updateGenreInput: UpdateGenreInput) {
     return this.genreModel
       .findOneAndUpdate({ _id: id }, updateGenreInput, {
