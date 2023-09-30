@@ -71,3 +71,35 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+```
+    // constructor(private readonly contentService: ContentService) {}
+    // @Mutation(() => Content)
+    // createContent(
+    //   @Args('createContentInput') createContentInput: CreateContentInput,
+    // ) {
+    //   return this.contentService.create(createContentInput);
+    // }
+    // @Query(() => [Content], { name: 'content' })
+    // findAll() {
+    //   return this.contentService.findAll();
+    // }
+    // @Query(() => Content, { name: 'content' })
+    // findOne(@Args('id', { type: () => Int }) id: number) {
+    //   return this.contentService.findOne(id);
+    // }
+    // @Mutation(() => Content)
+    // updateContent(
+    //   @Args('updateContentInput') updateContentInput: UpdateContentInput,
+    // ) {
+    //   return this.contentService.update(
+    //     updateContentInput.id,
+    //     updateContentInput,
+    //   );
+    // }
+    // @Mutation(() => Content)
+    // removeContent(@Args('id', { type: () => Int }) id: number) {
+    //   return this.contentService.remove(id);
+    // }
+```
