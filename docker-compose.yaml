@@ -3,7 +3,7 @@ services:
   mongo:
     ports:
       - '27017:27017'
-    container_name: dkrcomp-mongo
+    container_name: dokiodki-api-mongo
     restart: always
     logging:
       options:
@@ -14,7 +14,7 @@ services:
     image: mongo
     
   mongo-express:
-    image: mongo-express
+    image: dokiodki-api-mongo-express
     restart: always
     ports:
       - 8081:8081
