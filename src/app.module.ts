@@ -16,7 +16,9 @@ import { CatalogModule } from './catalog/catalog.module';
             cache: true,
             isGlobal: true,
         }),
-        MongooseModule.forRoot(process.env.DATABASE_URL),
+        MongooseModule.forRoot(
+            'mongodb+srv://dokidoki-api:nmyLYcgZRqK8rkQ3WihTejNxtkbjk9zpZd8x@dokidoki.sde9bxd.mongodb.net/dokidokiproduction?retryWrites=true&w=majority&authSource=admin',
+        ),
     ],
 })
 export class AppModule {}
