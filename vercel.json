@@ -1,7 +1,7 @@
 {
     "version": 2,
     "env": {
-        "DATABASE_URL": "@mongo_uri"
+        "DATABASE_URL": "mongodb+srv://dokidoki-api:nmyLYcgZRqK8rkQ3WihTejNxtkbjk9zpZd8x@dokidoki.sde9bxd.mongodb.net/dokidokiproduction?retryWrites=true&w=majority&authSource=admin"
 
     },
     "builds": [
